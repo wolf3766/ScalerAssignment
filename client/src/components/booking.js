@@ -1,11 +1,22 @@
-import axios from "axios"
+import axios, { all } from "axios"
 import "../styles/addBooking.css"
 import {useState,useEffect} from "react"
 import { useNavigate } from "react-router-dom";
 
+const Dp=(prop)=>{
+  console.log(prop.data)
+  return (
+    <div>
+     <h3>Minimum Time taken is {prop.data}</h3> 
+    </div>
+  )
+}
 function Booking(){
+
     const nav=useNavigate();
     const data=[];
+    const [allVal,setAllVal]=useState(0);
+    const [minDist,setMinDist]=useState(null);
     const [list,setList]=useState(data);
     const [formdata,setformdata]=useState({ //state variable to store data of new contact
         "email":"",
@@ -18,7 +29,10 @@ function Booking(){
             ...formdata,
             [e.target.name]:e.target.value
         }) 
+        setAllVal(allVal+1);
+
     }
+    
     const handlesubmit =async (e)=>{ // fucntion used to add data to backend
         e.preventDefault();
           await axios.post("http://localhost:5000/v1/create/booking",{
@@ -40,7 +54,15 @@ function Booking(){
                 setList(response.data.payload);
             })
     },[]);  
-
+    useEffect(()=>{
+      if(allVal===4){
+        axios.get(`http://localhost:5000/v1/minimumTime?source=${formdata.source}&destination=${formdata.destination}`)
+          .then(response=>{
+              setMinDist(response.data.payload)
+          })
+      }
+    },[allVal])
+    
     return( 
     <div class="main">
     <form onSubmit={handlesubmit}>
@@ -88,7 +110,7 @@ function Booking(){
         <option>Choose a Cab</option>
             {list 
             ? list.map((ele)=>{
-                return <option key={ele._id} value={ele._id} >{ele.carname}</option>
+                return <option key={ele._id} value={ele._id} >{ele.carname} </option>
             }):null}
         </select>
     </div>
@@ -96,7 +118,7 @@ function Booking(){
 
   <button type="submit" class="btn btn-primary">Book</button>
 </form>
- 
+    {minDist? <Dp data={minDist}/>:null }
     </div>
     )
 }
