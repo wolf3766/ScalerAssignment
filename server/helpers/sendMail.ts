@@ -1,25 +1,28 @@
 import nodemailer from "nodemailer"
+import { Request,Response } from "express";
 
+const sendMail = async (req:Request, res:Response) => {
+  let testAccount = await nodemailer.createTestAccount();
+  const receiver=req.query.email
+  // connect with the smtp
+  let transporter = await nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    auth: {
+      user: 'aurelie.abshire@ethereal.email',
+      pass: 'vPpzTcyzvYRFFCagU5'
+  },
+  });
 
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'youremail@gmail.com',
-    pass: 'yourpassword'
-  }
-});
+  let info = await transporter.sendMail({
+    from: '"Cab Bookers👻" <cab@gmail.com>', // sender address
+    to: `${receiver}`, // list of receivers
+    subject: "Cab Booked", // Subject line
+    text: "hello enjoy the ride", // plain text 
+  });
 
-var mailOptions = {
-  from: 'youremail@gmail.com',
-  to: 'myfriend@yahoo.com',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
+  console.log("Message sent: %s", info.messageId);
+  res.json(info);
 };
 
-transporter.sendMail(mailOptions, function(error:any, info:any){
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
+export default sendMail;
