@@ -15,7 +15,7 @@ function Booking(){
 
     const nav=useNavigate();
     const data=[];
-    const [allVal,setAllVal]=useState(0);
+    const [allVal,setAllVal]=useState(1);
     const [totalFare,setTotalFare]=useState(0);
     const [minDist,setMinDist]=useState(null);
     const [list,setList]=useState(data);
@@ -30,8 +30,10 @@ function Booking(){
             ...formdata,
             [e.target.name]:e.target.value
         }) 
-        setAllVal(allVal+1);
-
+        if(e.target.name!=="email"){
+          setAllVal(allVal+1);
+        }
+        
     }
     
     const handlesubmit =async (e)=>{ // fucntion used to add data to backend
@@ -43,7 +45,7 @@ function Booking(){
             cabId:formdata.cabId,
           })
           .then(response=>{
-              console.log("post",response);
+            // axios.get(`http://localhost:5000/v1/mail/${formdata.email}`)
               nav("/bookinglist");
           });
       }
