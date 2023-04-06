@@ -1,7 +1,4 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.apiV1 = void 0;
 const express_1 = require("express");
@@ -10,7 +7,6 @@ const cab_controller_1 = require("../controllers/cab.controller");
 const booking_middleware_1 = require("../middleware/booking.middleware");
 const booking_controller_1 = require("../controllers/booking.controller");
 const travel_controller_1 = require("../controllers/travel.controller");
-const sendMail_1 = __importDefault(require("../helpers/sendMail"));
 exports.apiV1 = (0, express_1.Router)();
 exports.apiV1.post("/cab/create", cab_middleware_1.cabValidator, cab_controller_1.createCabController);
 exports.apiV1.post("/create/booking", booking_middleware_1.bookingMiddleware, booking_controller_1.createCabBooking);
@@ -18,4 +14,4 @@ exports.apiV1.get("/minimumTime", travel_controller_1.shortestPath);
 exports.apiV1.patch("/updatecab/:cabId", cab_middleware_1.cabUpdateValidator, cab_controller_1.updateCabController);
 exports.apiV1.get("/cabs", cab_controller_1.fetchCabsController);
 exports.apiV1.get("/booking", booking_controller_1.fetchAllBooking);
-exports.apiV1.get("/mail/:email", sendMail_1.default);
+// apiV1.get("/mail/:email",sendMail);

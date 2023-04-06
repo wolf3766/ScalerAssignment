@@ -13,9 +13,9 @@ export async function cabValidator(
     try{
         const schema=Joi.object().keys({
             drivername:Joi.string().required(),
-            drivernumber:Joi.number().required(),
+            drivernumber:Joi.string().required(),
             carnumber:Joi.string().required(),
-            carName:Joi.string().required(),
+            carname:Joi.string().required(),
             price:Joi.number().required(),
             startTime:Joi.string().required(),
             endTime:Joi.string().required()

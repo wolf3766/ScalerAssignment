@@ -14,4 +14,4 @@ apiV1.get("/minimumTime",shortestPath);
 apiV1.patch("/updatecab/:cabId",cabUpdateValidator,updateCabController);
 apiV1.get("/cabs",fetchCabsController);
 apiV1.get("/booking",fetchAllBooking);
-apiV1.get("/mail/:email",sendMail)
+// apiV1.get("/mail/:email",sendMail);

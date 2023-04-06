@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cachedMongodbClient = exports.cachedDbConnection = exports.mongodbClient = exports.cachedDb = void 0;
+exports.cachedDbConnection = exports.mongodbClient = exports.cachedDb = void 0;
 const mongodb_1 = require("mongodb");
 require("dotenv").config();
 function connectToDatabase() {
@@ -39,13 +39,3 @@ function cachedDbConnection() {
     });
 }
 exports.cachedDbConnection = cachedDbConnection;
-function cachedMongodbClient() {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (!exports.mongodbClient) {
-            console.log("=> Connecting & caching database instance");
-            exports.mongodbClient = yield connectToDatabase();
-        }
-        return exports.mongodbClient;
-    });
-}
-exports.cachedMongodbClient = cachedMongodbClient;

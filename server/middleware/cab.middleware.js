@@ -21,9 +21,9 @@ function cabValidator(req, res, next) {
         try {
             const schema = joi_1.default.object().keys({
                 drivername: joi_1.default.string().required(),
-                drivernumber: joi_1.default.number().required(),
+                drivernumber: joi_1.default.string().required(),
                 carnumber: joi_1.default.string().required(),
-                carName: joi_1.default.string().required(),
+                carname: joi_1.default.string().required(),
                 price: joi_1.default.number().required(),
                 startTime: joi_1.default.string().required(),
                 endTime: joi_1.default.string().required()

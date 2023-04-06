@@ -26,11 +26,3 @@ export async function cachedDbConnection() {
   }
   return cachedDb;
 }
-
-export async function cachedMongodbClient() {
-  if (!mongodbClient) {
-    console.log("=> Connecting & caching database instance");
-    mongodbClient = await connectToDatabase();
-  }
-  return mongodbClient;
-}

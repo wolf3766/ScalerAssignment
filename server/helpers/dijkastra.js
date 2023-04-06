@@ -16,7 +16,7 @@ function dijkastra(src, des) {
         st.delete(tmp);
         const currNode = tmp.node;
         for (let i = 0; i < graph_1.NumberOfCites; i++) {
-            if (distance[i] > distance[currNode] + graph_1.graph[currNode][i] && graph_1.graph[currNode][i] !== 0) {
+            if (graph_1.graph[currNode][i] !== 0 && distance[i] > distance[currNode] + graph_1.graph[currNode][i]) {
                 if (distance[i] !== 1e9) {
                     let newEdge = {
                         weight: graph_1.graph[currNode][i],

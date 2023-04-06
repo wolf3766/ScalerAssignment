@@ -16,7 +16,7 @@ export function dijkastra(src:number,des:number){
 		st.delete(tmp);
 		const currNode:number=tmp.node;
 		for(let i=0;i<NumberOfCites;i++){
-			if(distance[i]>distance[currNode]+graph[currNode][i] && graph[currNode][i]!==0){
+			if(graph[currNode][i]!==0 && distance[i]>distance[currNode]+graph[currNode][i]){
 				if(distance[i]!==1e9){
 					let newEdge:Iedge={
 						weight:graph[currNode][i],
